@@ -11,6 +11,7 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 mainClassName = 'App'
+applicationName = "Saftech App"
 
 
 repositories {
@@ -25,3 +26,5 @@ dependencies {
     compile 'org.sql2o:sql2o:1.5.4'
     compile group: 'com.h2database', name: 'h2', version: '1.4.191'
 }
+defaultTasks = ['clean']
+task stage(dependsOn: ['clean', 'installApp'])

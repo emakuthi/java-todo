@@ -124,12 +124,6 @@ public class App {
             int categoryId = Integer.parseInt(req.queryParams("categoryId"));
             Task newTask = new Task(description, categoryId);        //See what we did with the hard coded categoryId?
             taskDao.add(newTask);
-//            List<Task> tasksSoFar = taskDao.getAll();
-//            for (Task taskItem: tasksSoFar
-//                 ) {
-//                System.out.println(taskItem);
-//            }
-//            System.out.println(tasksSoFar);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
