@@ -8,23 +8,24 @@
 <body>
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a href="/">Home</a></li>
-    <li role="presentation"><a href="/tasks/new">Add Section</a></li>
 
-    <li role="presentation" class="dropdown">
-           <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-               Departments <span class="caret"></span>
-           </a>
-           <ul class="dropdown-menu">
-               {{#if categories}}
-                   {{#each categories}}
-                       <li><a href="/categories/{{id}}">{{name}}</a></li>
-                   {{/each}}
-                   <li><a href="/categories/new">Add a Category</a></li>
-               {{else}}
-                   <li><a href="/categories/new">Add a Category</a></li>
-               {{/if}}
-           </ul>
-    </li>
+     <li role="presentation" class="dropdown">
+               <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                   Add Departments <span class="caret"></span>
+               </a>
+               <ul class="dropdown-menu">
+                   {{#if categories}}
+                       {{#each categories}}
+                           <li><a href="/categories/{{id}}">{{name}}</a></li>
+                       {{/each}}
+                       <li><a href="/categories/new">Add a Department</a></li>
+                   {{else}}
+                       <li><a href="/categories/new">Add a Department</a></li>
+                   {{/if}}
+               </ul>
+        </li>
+
+    <li role="presentation"><a href="/tasks/new">Add Section</a></li>
 
 </ul>
 <div class="container">
@@ -46,8 +47,8 @@
         <div class="container">
         <hr>
             <p class="text-muted">
-                <a class="btn btn-danger btn-sm" href="/categories/delete">delete all Departments & tasks</a>
-                <a class="btn btn-danger btn-sm" href="/tasks/delete">delete all tasks</a>
+                <a class="btn btn-danger btn-sm" href="/categories/delete">delete Departments/Sections</a>
+                <a class="btn btn-danger btn-sm" href="/tasks/delete">delete sections</a>
              </p>
         </div>
     </footer>
