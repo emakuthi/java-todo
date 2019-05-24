@@ -19,6 +19,14 @@ public class App {
         Sql2oTaskDao taskDao = new Sql2oTaskDao(sql2o);
         Sql2oCategoryDao categoryDao = new Sql2oCategoryDao(sql2o);
 
+        ProcessBuilder process = new ProcessBuilder();
+        Integer port;
+        if (process.environment().get("PORT") != null) {
+            port = Integer.parseInt(process.environment().get("PORT"));
+        } else {
+            port = 4567;
+        }
+        port(port);
 
         //get: show all tasks in all categories and show all categories
         get("/", (req, res) -> {
