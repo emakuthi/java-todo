@@ -70,7 +70,7 @@ public class Sql2OSectionsDao implements SectionsDao { //implementing our interf
     }
 
     @Override
-    public void clearAllTasks() {
+    public void clearAllSections() {
         String sql = "DELETE from tasks";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)

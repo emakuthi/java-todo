@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DepartmentsDao {
 
-    List<Sections> getAllTasksByCategory(int categoryId);
+    List<Sections> getAllSectionsByDepartment(int departmentId);
 
     //LIST
     List<Departments> getAll();
@@ -22,5 +22,5 @@ public interface DepartmentsDao {
 
     //DELETE
     void deleteById(int id);
-    void clearAllCategories();
+    void clearAllDepartments();
 }

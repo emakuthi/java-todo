@@ -9,21 +9,21 @@ public class Sections {
     private boolean completed;
     private LocalDateTime createdAt;
     private int id;
-    private int categoryId;
+    private int departmentId;
 
-    public Sections(String description, int categoryId){
+    public Sections(String description, int departmentId){
         this.description = description;
         this.completed = false;
         this.createdAt = LocalDateTime.now();
-        this.categoryId = categoryId;
+        this.departmentId = departmentId;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public int getDepartmentId() {
+        return departmentId;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 
     @Override
