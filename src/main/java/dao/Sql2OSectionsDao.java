@@ -1,45 +1,45 @@
 package dao;
 
-import models.Task;
+import models.Sections;
 import org.sql2o.*;
 import java.util.List;
 
-public class Sql2oTaskDao implements TaskDao { //implementing our interface
+public class Sql2OSectionsDao implements SectionsDao { //implementing our interface
 
     private final Sql2o sql2o;
 
-    public Sql2oTaskDao(Sql2o sql2o){
+    public Sql2OSectionsDao(Sql2o sql2o){
         this.sql2o = sql2o; //making the sql2o object available everywhere so we can call methods in it
     }
 
     @Override
-    public void add(Task task) {
+    public void add(Sections sections) {
         String sql = "INSERT INTO tasks (description, categoryId) VALUES (:description, :categoryId)"; //raw sql
         try(Connection con = sql2o.open()){ //try to open a connection
             int id = (int) con.createQuery(sql, true) //make a new variable
-                    .bind(task)
+                    .bind(sections)
                     .executeUpdate() //run it all
                     .getKey(); //int id is now the row number (row “key”) of db
-            task.setId(id); //update object to set id now from database
+            sections.setId(id); //update object to set id now from database
         } catch (Sql2oException ex) {
             System.out.println(ex); //oops we have an error!
         }
     }
 
     @Override
-    public List<Task> getAll() {
+    public List<Sections> getAll() {
         try(Connection con = sql2o.open()){
             return con.createQuery("SELECT * FROM tasks") //raw sql
-                    .executeAndFetch(Task.class); //fetch a list
+                    .executeAndFetch(Sections.class); //fetch a list
         }
     }
 
     @Override
-    public Task findById(int id) {
+    public Sections findById(int id) {
         try(Connection con = sql2o.open()){
             return con.createQuery("SELECT * FROM tasks WHERE id = :id")
                     .addParameter("id", id) //key/value pair, key must match above
-                    .executeAndFetchFirst(Task.class); //fetch an individual item
+                    .executeAndFetchFirst(Sections.class); //fetch an individual item
         }
     }
 

@@ -1,10 +1,9 @@
 package models;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Objects;
 
-public class Task {
+public class Sections {
 
     private String description;
     private boolean completed;
@@ -12,7 +11,7 @@ public class Task {
     private int id;
     private int categoryId;
 
-    public Task(String description, int categoryId){
+    public Sections(String description, int categoryId){
         this.description = description;
         this.completed = false;
         this.createdAt = LocalDateTime.now();
@@ -30,11 +29,11 @@ public class Task {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Task)) return false;
-        Task task = (Task) o;
-        return completed == task.completed &&
-                id == task.id &&
-                Objects.equals(description, task.description);
+        if (!(o instanceof Sections)) return false;
+        Sections sections = (Sections) o;
+        return completed == sections.completed &&
+                id == sections.id &&
+                Objects.equals(description, sections.description);
     }
 
     @Override

@@ -2,12 +2,12 @@ package models;
 
 import java.util.Objects;
 
-public class Category {
+public class Departments {
     private String name;
     private int id;
 
 
-    public Category(String name) {
+    public Departments(String name) {
         this.name = name;
     }
 
@@ -30,10 +30,10 @@ public class Category {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category)) return false;
-        Category category = (Category) o;
-        return id == category.id &&
-                Objects.equals(name, category.name);
+        if (!(o instanceof Departments)) return false;
+        Departments departments = (Departments) o;
+        return id == departments.id &&
+                Objects.equals(name, departments.name);
     }
 
     @Override

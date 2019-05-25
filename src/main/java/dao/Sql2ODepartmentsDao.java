@@ -1,48 +1,48 @@
 package dao;
 
-import models.Category;
-import models.Task;
+import models.Departments;
+import models.Sections;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 import java.util.List;
 
-public class Sql2oCategoryDao implements CategoryDao {
+public class Sql2ODepartmentsDao implements DepartmentsDao {
 
     private final Sql2o sql2o;
 
-    public Sql2oCategoryDao(Sql2o sql2o){
+    public Sql2ODepartmentsDao(Sql2o sql2o){
         this.sql2o = sql2o;
     }
 
     @Override
-    public void add(Category category) {
+    public void add(Departments departments) {
         String sql = "INSERT INTO categories (name) VALUES (:name)";
         try(Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
-                    .bind(category)
+                    .bind(departments)
                     .executeUpdate()
                     .getKey();
-            category.setId(id);
+            departments.setId(id);
         } catch (Sql2oException ex) {
             System.out.println(ex);
         }
     }
 
     @Override
-    public List<Category> getAll() {
+    public List<Departments> getAll() {
         try(Connection con = sql2o.open()){
             return con.createQuery("SELECT * FROM categories")
-                    .executeAndFetch(Category.class);
+                    .executeAndFetch(Departments.class);
         }
     }
 
     @Override
-    public Category findById(int id) {
+    public Departments findById(int id) {
         try(Connection con = sql2o.open()){
             return con.createQuery("SELECT * FROM categories WHERE id = :id")
                     .addParameter("id", id)
-                    .executeAndFetchFirst(Category.class);
+                    .executeAndFetchFirst(Departments.class);
         }
     }
 
@@ -83,11 +83,11 @@ public class Sql2oCategoryDao implements CategoryDao {
     }
 
     @Override
-    public List<Task> getAllTasksByCategory(int categoryId) {
+    public List<Sections> getAllTasksByCategory(int categoryId) {
         try(Connection con = sql2o.open()){
             return con.createQuery("SELECT * FROM tasks WHERE categoryId = :categoryId")
                     .addParameter("categoryId", categoryId)
-                    .executeAndFetch(Task.class);
+                    .executeAndFetch(Sections.class);
         }
     }
 }
