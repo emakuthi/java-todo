@@ -14,18 +14,18 @@
                    Add Departments <span class="caret"></span>
                </a>
                <ul class="dropdown-menu">
-                   {{#if categories}}
-                       {{#each categories}}
-                           <li><a href="/categories/{{id}}">{{name}}</a></li>
+                   {{#if departments}}
+                       {{#each departments}}
+                           <li><a href="/departments/{{id}}">{{name}}</a></li>
                        {{/each}}
-                       <li><a href="/categories/new">Add a Department</a></li>
+                       <li><a href="/departments/new">Add a Department</a></li>
                    {{else}}
-                       <li><a href="/categories/new">Add a Department</a></li>
+                       <li><a href="/departments/new">Add a Department</a></li>
                    {{/if}}
                </ul>
         </li>
 
-    <li role="presentation"><a href="/tasks/new">Add Section</a></li>
+    <li role="presentation"><a href="/sections/new">Add Section</a></li>
 
 </ul>
 <div class="container">
@@ -47,8 +47,8 @@
         <div class="container">
         <hr>
             <p class="text-muted">
-                <a class="btn btn-danger btn-sm" href="/categories/delete">delete Departments/Sections</a>
-                <a class="btn btn-danger btn-sm" href="/tasks/delete">delete sections</a>
+                <a class="btn btn-danger btn-sm" href="/departments/delete">delete Departments/Sections</a>
+                <a class="btn btn-danger btn-sm" href="/sections/delete">delete sections</a>
              </p>
         </div>
     </footer>

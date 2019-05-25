@@ -1,14 +1,14 @@
 {{#partial "content"}}
 
-    <h1> {{category.name}}</h1>
+    <h1> {{department.name}}</h1>
 
     {{#if tasks}}
-        {{#each tasks }}
+        {{#each sections }}
         <div class="panel">
         <div class="panel-heading">
-        <h1> {{category.name}}</h1>
+        <h1> {{department.name}}</h1>
         <div class="panel-body">
-            <p><a href="/categories/{{categoryId}}/tasks/{{id}}">{{description}}</a></p>
+            <p><a href="/departments/{{departmentId}}/sections/{{id}}">{{description}}</a></p>
 
          </div>
          </div>
