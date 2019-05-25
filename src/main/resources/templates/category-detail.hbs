@@ -1,15 +1,15 @@
 {{#partial "content"}}
-    <h1>{{category.name}}</h1>
-    <p>Here are all the tasks listed in this category:</p>
-    <ul>
+    <h3>{{category.name}}</h3>
+    <p>These are the Sections under this {{category.name}}:</p>
+    <ol>
         {{#each tasks}}
             <li>
                 <p><a href="/categories/{{category.id}}/tasks/{{id}}">{{description}}</a></p>
             </li>
         {{/each}}
-    </ul>
-    <a href="/categories/{{category.id}}/edit">Edit this category</a><br>
-    <a href="/categories/{{category.id}}/delete">DELETE this category</a>
+    </ol>
+    <a class="btn btn-secondary btn-sm" href="/categories/{{category.id}}/edit">edit Department</a>
+    <a class="btn btn-secondary btn-sm" href="/categories/{{category.id}}/delete">delete this Department</a>
 {{/partial}}
 
 {{> layout.hbs}}
