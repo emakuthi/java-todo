@@ -43,7 +43,7 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             List<Departments> categories = categoryDao.getAll(); //refresh list of links for navbar
             model.put("categories", categories);
-            return new ModelAndView(model, "category-form.hbs"); //new layout
+            return new ModelAndView(model, "department-form.hbs"); //new layout
         }, new HandlebarsTemplateEngine());
 
         //post: process a form to create a new category
@@ -83,7 +83,7 @@ public class App {
             List<Sections> allTasksByCategory = categoryDao.getAllTasksByCategory(idOfCategoryToFind);
             model.put("tasks", allTasksByCategory);
             model.put("categories", categoryDao.getAll()); //refresh list of links for navbar
-            return new ModelAndView(model, "category-detail.hbs"); //new
+            return new ModelAndView(model, "department-detail.hbs"); //new
         }, new HandlebarsTemplateEngine());
 
         //get: show a form to update a category
@@ -146,7 +146,7 @@ public class App {
             model.put("category", foundDepartments);
             model.put("task", foundSections); //add it to model for template to display
             model.put("categories", categoryDao.getAll()); //refresh list of links for navbar
-            return new ModelAndView(model, "task-detail.hbs"); //individual task page.
+            return new ModelAndView(model, "section-detail.hbs"); //individual task page.
         }, new HandlebarsTemplateEngine());
 
         //get: show a form to update a task
