@@ -6,14 +6,14 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class Sql2OSectionsDaoTest {
-    private Sql2OSectionsDao taskDao; //ignore me for now. We'll create this soon.
+    private Sql2OSectionsDao sectionDao; //ignore me for now. We'll create this soon.
     private Connection conn; //must be sql2o class conn
 
     @Before
     public void setUp() throws Exception {
         String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
         Sql2o sql2o = new Sql2o(connectionString, "", "");
-        taskDao = new Sql2OSectionsDao(sql2o); //ignore me for now
+        sectionDao = new Sql2OSectionsDao(sql2o); //ignore me for now
         conn = sql2o.open(); //keep connection open through entire test so it does not get erased
     }
 
@@ -26,66 +26,66 @@ public class Sql2OSectionsDaoTest {
     public void addingTaskSetsId() throws Exception {
         Sections sections = setupNewTask();
         int originalTaskId = sections.getId();
-        taskDao.add(sections);
+        sectionDao.add(sections);
         assertNotEquals(originalTaskId, sections.getId()); //how does this work?
     }
 
     @Test
     public void existingTasksCanBeFoundById() throws Exception {
         Sections sections = setupNewTask();
-        taskDao.add(sections); //add to dao (takes care of saving)
-        Sections foundSections = taskDao.findById(sections.getId()); //retrieve
+        sectionDao.add(sections); //add to dao (takes care of saving)
+        Sections foundSections = sectionDao.findById(sections.getId()); //retrieve
         assertEquals(sections, foundSections); //should be the same
     }
 
     @Test
     public void addedTasksAreReturnedFromgetAll() throws Exception {
         Sections sections = setupNewTask();
-        taskDao.add(sections);
-        assertEquals(1, taskDao.getAll().size());
+        sectionDao.add(sections);
+        assertEquals(1, sectionDao.getAll().size());
     }
 
     @Test
     public void noTasksReturnsEmptyList() throws Exception {
-        assertEquals(0, taskDao.getAll().size());
+        assertEquals(0, sectionDao.getAll().size());
     }
 
     @Test
     public void updateChangesTaskContent() throws Exception {
         String initialDescription = "mow the lawn";
         Sections sections = setupNewTask();
-        taskDao.add(sections);
+        sectionDao.add(sections);
 
-        taskDao.update(sections.getId(),"brush the cat", 1);
-        Sections updatedSections = taskDao.findById(sections.getId()); //why do I need to refind this?
+        sectionDao.update(sections.getId(),"brush the cat", 1);
+        Sections updatedSections = sectionDao.findById(sections.getId()); //why do I need to refind this?
         assertNotEquals(initialDescription, updatedSections.getDescription());
     }
 
     @Test
     public void deleteByIdDeletesCorrectTask() throws Exception {
         Sections sections = setupNewTask();
-        taskDao.add(sections);
-        taskDao.deleteById(sections.getId());
-        assertEquals(0, taskDao.getAll().size());
+        sectionDao.add(sections);
+        sectionDao.deleteById(sections.getId());
+        assertEquals(0, sectionDao.getAll().size());
     }
 
     @Test
     public void clearAllClearsAll() throws Exception {
         Sections sections = setupNewTask();
         Sections otherSections = new Sections("brush the cat", 2);
-        taskDao.add(sections);
-        taskDao.add(otherSections);
-        int daoSize = taskDao.getAll().size();
-        taskDao.clearAllTasks();
-        assertTrue(daoSize > 0 && daoSize > taskDao.getAll().size()); //this is a little overcomplicated, but illustrates well how we might use `assertTrue` in a different way.
+        sectionDao.add(sections);
+        sectionDao.add(otherSections);
+        int daoSize = sectionDao.getAll().size();
+        sectionDao.clearAllSections();
+        assertTrue(daoSize > 0 && daoSize > sectionDao.getAll().size()); //this is a little overcomplicated, but illustrates well how we might use `assertTrue` in a different way.
     }
 
     @Test
     public void categoryIdIsReturnedCorrectly() throws Exception {
         Sections sections = setupNewTask();
-        int originalCatId = sections.getCategoryId();
-        taskDao.add(sections);
-        assertEquals(originalCatId, taskDao.findById(sections.getId()).getCategoryId());
+        int originalCatId = sections.getDepartmentId();
+        sectionDao.add(sections);
+        assertEquals(originalCatId, sectionDao.findById(sections.getId()).getDepartmentId());
     }
 
     //define the following once and then call it as above in your tests.

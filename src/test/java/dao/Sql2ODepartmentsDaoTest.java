@@ -35,13 +35,13 @@ public class Sql2ODepartmentsDaoTest {
     @Test
     public void addingCategorySetsId() throws Exception {
         Departments departments = setupNewCategory();
-        int originalCategoryId = departments.getId();
+        int originalDepartmentId = departments.getId();
         departmentDao.add(departments);
-        assertNotEquals(originalCategoryId, departments.getId());
+        assertNotEquals(originalDepartmentId, departments.getId());
     }
 
     @Test
-    public void existingCategoriesCanBeFoundById() throws Exception {
+    public void existingDepartmentsCanBeFoundById() throws Exception {
         Departments departments = setupNewCategory();
         departmentDao.add(departments);
         Departments foundDepartments = departmentDao.findById(departments.getId());
@@ -49,19 +49,19 @@ public class Sql2ODepartmentsDaoTest {
     }
 
     @Test
-    public void addedCategoriesAreReturnedFromGetAll() throws Exception {
+    public void addedDepartmentsAreReturnedFromGetAll() throws Exception {
         Departments departments = setupNewCategory();
         departmentDao.add(departments);
         assertEquals(1, departmentDao.getAll().size());
     }
 
     @Test
-    public void noCategoriesReturnsEmptyList() throws Exception {
+    public void noDepartmentsReturnsEmptyList() throws Exception {
         assertEquals(0, departmentDao.getAll().size());
     }
 
     @Test
-    public void updateChangesCategoryContent() throws Exception {
+    public void updateChangesDepartmentContent() throws Exception {
         String initialDescription = "Yardwork";
         Departments departments = new Departments(initialDescription);
         departmentDao.add(departments);
@@ -71,38 +71,38 @@ public class Sql2ODepartmentsDaoTest {
     }
 
     @Test
-    public void deleteByIdDeletesCorrectCategory() throws Exception {
+    public void deleteByIdDeletesCorrectDepartment() throws Exception {
         Departments departments = setupNewCategory();
-        categoryDao.add(departments);
-        categoryDao.deleteById(departments.getId());
-        assertEquals(0, categoryDao.getAll().size());
+        departmentDao.add(departments);
+        departmentDao.deleteById(departments.getId());
+        assertEquals(0, departmentDao.getAll().size());
     }
 
     @Test
     public void clearAllClearsAllCategories() throws Exception {
         Departments departments = setupNewCategory();
         Departments otherDepartments = new Departments("Cleaning");
-        categoryDao.add(departments);
-        categoryDao.add(otherDepartments);
-        int daoSize = categoryDao.getAll().size();
-        categoryDao.clearAllDepartments();
-        assertTrue(daoSize > 0 && daoSize > categoryDao.getAll().size());
+        departmentDao.add(departments);
+        departmentDao.add(otherDepartments);
+        int daoSize = departmentDao.getAll().size();
+        departmentDao.clearAllDepartments();
+        assertTrue(daoSize > 0 && daoSize > departmentDao.getAll().size());
     }
 
     @Test
     public void getAllTasksByCategoryReturnsTasksCorrectly() throws Exception {
         Departments departments = setupNewCategory();
-        categoryDao.add(departments);
+        departmentDao.add(departments);
         int categoryId = departments.getId();
-        Sections newSections = new Sections("mow the lawn", departmentId);
+        Sections newSections = new Sections("mow the lawn", categoryId);
         Sections otherSections = new Sections("pull weeds", categoryId);
         Sections thirdSections = new Sections("trim hedge", categoryId);
-        taskDao.add(newSections);
-        taskDao.add(otherSections); //we are not adding task 3 so we can test things precisely.
-        assertEquals(2, categoryDao.getAllSectionsByDepartment(departmentId).size());
-        assertTrue(categoryDao.getAllTasksByCategory(categoryId).contains(newSections));
-        assertTrue(categoryDao.getAllTasksByCategory(categoryId).contains(otherSections));
-        assertFalse(categoryDao.getAllTasksByCategory(categoryId).contains(thirdSections)); //things are accurate!
+        sectionDao.add(newSections);
+        sectionDao.add(otherSections); //we are not adding task 3 so we can test things precisely.
+        assertEquals(2, departmentDao.getAllSectionsByDepartment(categoryId).size());
+        assertTrue(departmentDao.getAllSectionsByDepartment(categoryId).contains(newSections));
+        assertTrue(departmentDao.getAllSectionsByDepartment(categoryId).contains(otherSections));
+        assertFalse(departmentDao.getAllSectionsByDepartment(categoryId).contains(thirdSections)); //things are accurate!
     }
 
     // helper method
